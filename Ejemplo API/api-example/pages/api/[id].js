@@ -1,18 +1,16 @@
 import {invertString} from "../../model/StringFunFunctions";
+import db from "../../util/database";
 
 export default function handler(req, res) {
-    if (req.method === 'POST'){
-        res.send({
-            query: req.query.id,
-            str: invertString(req.query.id),
-            str3: req.body.dato,
-            str2: invertString(req.body.dato)
+    let id = req.query.id
+    let di = invertString(id)
+    db.push({
+        a: id,
+        b: di
+    })
 
-        })
-    }else{
-        res.send({
-            query: req.query.id,
-            str: invertString(req.query.id)
-        })
-    }
+    console.log(db)
+
+    res.json(db)
+
 }
